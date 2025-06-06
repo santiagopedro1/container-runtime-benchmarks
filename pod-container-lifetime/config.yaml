@@ -1,0 +1,17 @@
+global:
+  etcdMetrics: false
+  gc: true
+  measurements:
+    - name: podLatency
+      esIndex: pod-latency-summary
+jobs:
+  - name: create-pods
+    jobType: create
+    jobIterations: 50 # Number of pods to create
+    qps: 20
+    burst: 20
+    podWait: true
+    waitFor:
+      - "Running"
+    namespace: "benchmark"
+    podTemplate: "pod-template.yaml"

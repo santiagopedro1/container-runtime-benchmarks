@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: density-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: density
+  template:
+    metadata:
+      labels:
+        app: density
+    spec:
+      containers:
+      - name: pause
+        image: k8s.gcr.io/pause

@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: fio-test
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: fio
+        image: ax/fio
+        command: ["/usr/bin/fio"]
+        args: [
+          "--name=randwrite",
+          "--ioengine=libaio",
+          "--iodepth=64",
+          "--rw=randwrite",
+          "--bs=4k",
+          "--direct=1",
+          "--size=256M",
+          "--numjobs=1",
+          "--runtime=60",
+          "--group_reporting",
+          "--filename=/data/fiotest"
+        ]
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      volumes:
+      - name: data
+        emptyDir: {}
