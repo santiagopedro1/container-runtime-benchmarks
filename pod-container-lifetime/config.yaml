@@ -1,17 +1,13 @@
 global:
-  etcdMetrics: false
-  gc: true
   measurements:
     - name: podLatency
-      esIndex: pod-latency-summary
 jobs:
-  - name: create-pods
-    jobType: create
-    jobIterations: 50 # Number of pods to create
+  - name: pod-latency-test
+    jobIterations: 50         # Create 50 objects
     qps: 20
     burst: 20
-    podWait: true
-    waitFor:
-      - "Running"
-    namespace: "benchmark"
-    podTemplate: "pod-template.yaml"
+    namespace: benchmark
+    podWait: true             # CRITICAL: Wait for pods to be ready
+    objects:
+      - objectTemplate: pod.yaml
+        replicas: 1           # Create 1 replica of the template per iteration
