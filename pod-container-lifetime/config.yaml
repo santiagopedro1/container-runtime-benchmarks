@@ -3,7 +3,7 @@ global:
     - name: podLatency
 jobs:
   - name: pod-latency-test
-    jobIterations: 50         # Create 50 objects
+    jobIterations: 10         # Create 50 objects
     qps: 20
     burst: 20
     namespace: benchmark
