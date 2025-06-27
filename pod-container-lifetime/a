@@ -1,0 +1,1 @@
+./scrip.sh containerd 100 1 && ./scrip.sh containerd 100 2 && ./scrip.sh containerd 100 3 && ./scrip.sh containerd 100 5 &
