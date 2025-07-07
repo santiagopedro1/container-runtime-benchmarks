@@ -1,0 +1,16 @@
+{
+  "metadata": {
+    "name": "benchmark-container",
+    "attempt": 1
+  },
+  "image": {
+    "image": "alpine:latest"
+  },
+  "command": [
+    "sleep",
+    "3600"
+  ],
+  "log_path": "benchmark-container.log",
+  "linux": {}
+}
+

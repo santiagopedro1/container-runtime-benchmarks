@@ -1,0 +1,11 @@
+{
+  "metadata": {
+    "name": "benchmark-pod",
+    "namespace": "default",
+    "attempt": 1,
+    "uid": "benchmarking-uid-1751401312621387341"
+  },
+  "logDirectory": "/tmp",
+  "linux": {}
+}
+
