@@ -1,0 +1,107 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: fio-test-write-1
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: fio
+          image: localhost/custom-fio
+          imagePullPolicy: Never
+          command: ['fio']
+          args:
+            [
+              '--name=randwrite',
+              '--ioengine=libaio',
+              '--iodepth=64',
+              '--rw=randwrite',
+              '--bs=4k',
+              '--direct=1',
+              '--numjobs=1',
+              '--size=1G',
+              '--runtime=300',
+              '--group_reporting',
+              '--filename=/data/fiotest',
+              '--output-format=json',
+              '--time_based',
+            ]
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          emptyDir: {}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: fio-test-write-4
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: fio
+          image: localhost/custom-fio
+          imagePullPolicy: Never
+          command: ['fio']
+          args:
+            [
+              '--name=randwrite',
+              '--ioengine=libaio',
+              '--iodepth=64',
+              '--rw=randwrite',
+              '--bs=4k',
+              '--direct=1',
+              '--numjobs=4',
+              '--size=4G',
+              '--runtime=300',
+              '--group_reporting',
+              '--filename=/data/fiotest',
+              '--output-format=json',
+              '--time_based',
+            ]
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          emptyDir: {}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: fio-test-write-8
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: fio
+          image: localhost/custom-fio
+          imagePullPolicy: Never
+          command: ['fio']
+          args:
+            [
+              '--name=randwrite',
+              '--ioengine=libaio',
+              '--iodepth=64',
+              '--rw=randwrite',
+              '--bs=4k',
+              '--direct=1',
+              '--numjobs=8',
+              '--size=8G',
+              '--runtime=300',
+              '--group_reporting',
+              '--filename=/data/fiotest',
+              '--output-format=json',
+              '--time_based',
+            ]
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          emptyDir: {}

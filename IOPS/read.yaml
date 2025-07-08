@@ -1,0 +1,107 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: fio-test-read-1
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: fio
+          image: localhost/custom-fio
+          imagePullPolicy: Never
+          command: ['fio']
+          args:
+            [
+              '--name=randread',
+              '--ioengine=libaio',
+              '--iodepth=64',
+              '--rw=randread',
+              '--bs=4k',
+              '--direct=1',
+              '--numjobs=1',
+              '--runtime=300',
+              '--size=1G',
+              '--group_reporting',
+              '--filename=/data/fiotest',
+              '--output-format=json',
+              '--time_based',
+            ]
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          emptyDir: {}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: fio-test-read-4
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: fio
+          image: localhost/custom-fio
+          imagePullPolicy: Never
+          command: ['fio']
+          args:
+            [
+              '--name=randread',
+              '--ioengine=libaio',
+              '--iodepth=64',
+              '--rw=randread',
+              '--bs=4k',
+              '--direct=1',
+              '--numjobs=4',
+              '--runtime=300',
+              '--size=4G',
+              '--group_reporting',
+              '--filename=/data/fiotest',
+              '--output-format=json',
+              '--time_based',
+            ]
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          emptyDir: {}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: fio-test-read-8
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: fio
+          image: localhost/custom-fio
+          imagePullPolicy: Never
+          command: ['fio']
+          args:
+            [
+              '--name=randread',
+              '--ioengine=libaio',
+              '--iodepth=64',
+              '--rw=randread',
+              '--bs=4k',
+              '--direct=1',
+              '--numjobs=8',
+              '--runtime=300',
+              '--size=8G',
+              '--group_reporting',
+              '--filename=/data/fiotest',
+              '--output-format=json',
+              '--time_based',
+            ]
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          emptyDir: {}

@@ -1,1 +1,0 @@
-JobName,OperationType,Slat_min_usec,Slat_max_usec,Slat_avg_usec,Clat_min_usec,Clat_max_usec,Clat_avg_usec,Lat_min_usec,Lat_max_usec,Lat_avg_usec,BW_min_KBps,BW_max_KBps,BW_avg_KBps
